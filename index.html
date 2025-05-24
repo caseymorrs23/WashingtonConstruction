@@ -6,6 +6,15 @@
   <title>Washington Construction | Pierce County, WA</title>
   <meta name="description" content="Washington Construction provides landscaping and full-service general contracting throughout Pierce County, WA. From lawn care to roofing and remodeling, we do it all.">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+</style>
 </head>
 <body class="text-gray-800 font-sans">
   <!-- Header -->
@@ -30,7 +39,7 @@
     <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white text-center px-4">
       <h1 class="text-4xl font-bold mb-4">Building the Northwest Better</h1>
       <p class="text-lg mb-6">From the ground up — landscaping, remodeling, roofing, and more.</p>
-      <a href="#contact" class="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800">Work with Washington Construction</a>
+      <button onclick="openForm()" class="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800">Work with Washington Construction</button>
     </div>
   </section>
 
@@ -105,5 +114,42 @@
       </div>
     </div>
   </footer>
+<div id="formModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden transition-opacity duration-300">
+  <div class="bg-white p-6 rounded shadow-lg max-w-lg w-full relative animate-fade-in">
+    <button onclick="closeForm()" class="absolute top-2 right-2 text-gray-500 hover:text-black">&times;</button>
+    <h2 class="text-2xl font-bold mb-4">Get in Touch</h2>
+    <form action="https://formsubmit.co/manueltitanlawn@yahoo.com" method="POST">
+      <label class="block mb-2 font-semibold">Name</label>
+      <input type="text" name="name" required class="w-full border rounded px-4 py-2 mb-4">
+      <label class="block mb-2 font-semibold">Email</label>
+      <input type="email" name="email" required class="w-full border rounded px-4 py-2 mb-4">
+      <label class="block mb-2 font-semibold">Message</label>
+      <textarea name="message" rows="5" required class="w-full border rounded px-4 py-2 mb-4"></textarea>
+      <input type="hidden" name="_next" value="thank-you.html">
+      <button type="submit" class="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800">Send Message</button>
+    </form>
+  </div>
+</div>
+<script>
+  function openForm() {
+    document.getElementById('formModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeForm() {
+    document.getElementById('formModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('formModal');
+    if (event.target === modal) {
+      closeForm();
+    }
+  });
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeForm();
+    }
+  });
+</script>
 </body>
 </html>
